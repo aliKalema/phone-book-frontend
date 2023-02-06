@@ -1,0 +1,107 @@
+<div class="max-w-7xl container grid  grid-cols-2 justify-items-stretch my-4 mx-auto items-center bg-slate-100">
+  <div class="container w-auto justify-self-start flex justify-start  items-center">
+    <div class="text-2xl text-indigo-900 font-black mr-7 flex justify-start container w-auto items-center">
+      PHONE BOOK
+    </div>
+    <ul class="navbar-nav flex  pl-0 list-style-none w-auto container items-center">
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 text-base hover:text-gray-700 focus:text-gray-700 p-0" routerLink="/contact">Contact</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 text-base focus:text-gray-700 p-0" routerLink="/contacts/add">Add</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="max-w-7xl bg-slate-100  container my-4 mx-auto items-center mx-auto relative overflow-x-auto shadow-md sm:rounded-lg p-7 ">
+  <form #contactForm="ngForm" (ngSubmit)="onSaveForm(contactForm)">
+    <div class="container flex justify-between">
+      <div>
+        <div class="mb-4 w-[5rem] h-[5rem]" *ngIf="image">
+          <img [src]="image.url" class="w-full h-full rounded-full" alt="">
+        </div>
+        <div class="mb-4 flex w-[5rem] h-[5rem] border rounded-full container mx-auto items-center justify-center" *ngIf="!image">
+          <mat-icon class="mat-18">image</mat-icon>
+        </div>
+      </div>
+      <div>
+        <input class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" type="file" #selectFile (change)="onFileSelected($event)">
+      </div>
+    </div>
+
+    <div class="container grid gap-5 grid-cols-2">
+      <div style="font-size: 16px;">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>First Name</mat-label>
+          <input type="text" matInput placeholder="John" name="firstName" [(ngModel)]="contact.firstName"/>
+          <mat-icon  style="color: #4481eb;"  matSuffix>face</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div style="font-size: 16px;">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Last Name</mat-label>
+          <input type="text" matInput placeholder="Doe" name= 'lastName' [(ngModel)]="contact.lastName" />
+          <mat-icon  style="color: #4481eb;"  matSuffix>badge</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div style="font-size: 16px;">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Other Names</mat-label>
+          <input type="text" matInput placeholder="Kimani" name="otherNames" [(ngModel)]="contact.otherNames" />
+          <mat-icon  style="color: #4481eb;"  matSuffix>contacts</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill" [hideRequiredMarker]="hideRequiredControl.value" [floatLabel]="getFloatLabelValue()" style="width: 100%">
+          <mat-select required [(ngModel)]="contact.countryId" name="countryId">
+            <mat-option value="{{country.id}}" class="flex justify-between" *ngFor="let country of countries" (click)="onCountrySelected(country!.code)" >
+              <div class="flex justify-between">
+                <span class="uppercase">{{country!.name}}</span>
+                <span class="flag-icon flag-icon-{{country!.iso}} flag-icon-squared"></span>
+              </div>
+            </mat-option>
+          </mat-select>
+          <mat-label>
+            <mat-icon>flag</mat-icon>
+            <b> COUNTRY</b>
+          </mat-label>
+        </mat-form-field>
+      </div>
+
+      <div style="font-size: 16px;">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Phone</mat-label>
+          <input type="number" matInput placeholder="7xxxxxxxx" name="phone"[(ngModel)]="contact.phone"/>
+          <span matPrefix>
+            <b>{{code}}</b>
+            &nbsp; &nbsp;
+          </span>
+          <mat-icon  style="color: #4481eb;"  matSuffix>phone_in_talk</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div style="font-size: 16px;">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput placeholder="johndoe@mail.com" name="email" [(ngModel)]="contact.email" />
+          <mat-icon  style="color: #4481eb;"  matSuffix>mail</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="flex mt-3 justify-end">
+      <button mat-stroked-button color="primary" (click)="clearForm(contactForm)">
+        <mat-icon class="text-base">clear</mat-icon>
+        CLEAR
+      </button>
+      &nbsp; &nbsp;
+      <button type="submit" mat-raised-button color="primary">
+        <mat-icon class="text-base">save</mat-icon>
+        SAVE
+      </button>
+    </div>
+  </form>
+</div>

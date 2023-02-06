@@ -1,0 +1,10 @@
+<app-header (searchContact)="onSearchContact($event) " (deleteContact)="onDeleteContacts()"></app-header>
+<div class="min-h-full max-w-7xl  container mx-auto  bg-slate-100">
+  <app-contact-header (columnsCountChange)="onColumnsCountChange($event)"  (sortChange)="onSortChange($event)"></app-contact-header>
+  <mat-grid-list *ngIf="contacts && contacts.length" gutterSize="2" [cols]="cols" [rowHeight]="rowHeight">
+    <mat-grid-tile *ngFor="let contact of contacts">
+      <app-contact-box  (selectContact)="onSelectContact($event)" [contact]="contact" [fullWidthMode]="cols === 1" class="w-full">
+      </app-contact-box>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

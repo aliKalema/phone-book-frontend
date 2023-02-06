@@ -1,0 +1,55 @@
+<div class="max-w-7xl container grid  grid-cols-2 justify-items-stretch my-4 mx-auto items-center bg-slate-100">
+  <div class="container w-auto justify-self-start flex justify-start  items-center">
+    <div class="text-2xl text-indigo-900 font-black mr-7 flex justify-start container w-auto items-center">
+      PHONE BOOK
+    </div>
+    <ul class="navbar-nav flex  pl-0 list-style-none w-auto container items-center">
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 text-base hover:text-gray-700 focus:text-gray-700 p-0" routerLink="/contact">Contact</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 text-base focus:text-gray-700 p-0" routerLink="/contacts/add">Add</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="contact"  class=" text-center max-w-7xl mx-auto bg-white shadow rounded hover:border-indigo-700 hover:border group  p-6 ">
+  <div >
+    <img  *ngIf="contact.image" class=" rounded-full  mx-auto w-24 h-24"   [src]="contact.image"/>
+    <div *ngIf="!contact.image" class="w-33 h-33 border rounded-full mx-auto flex justify-center container items-center " >
+      <mat-icon class="mat-18">image</mat-icon>
+    </div>
+
+    <div class="w-full px-4 container mx-auto items-center" >
+      <div class="container mx-auto items-center" >
+        <div class="container mx-auto items-center" >
+          <div class="truncate hover:whitespace-normal text-base mx-3" >
+            {{ contact.firstName }}
+          </div>
+          <div class="truncate hover:whitespace-normal text-base mx-3" >
+            {{ contact.lastName }}
+          </div>
+          <div class="truncate hover:whitespace-normal text-base mx-3" >
+            {{ contact.otherNames }}
+          </div>
+          <div class="truncate hover:whitespace-normal text-base mx-3" >
+            ({{contact.country!.code}}) {{ contact.phone }}
+          </div>
+          <div class="truncate hover:whitespace-normal text-base mx-3" >
+            {{ contact.email }}
+          </div>
+          <div>
+            <span class="flag-icon flag-icon-{{contact.country!.iso}} flag-icon-squared"></span>
+            <span class="text-base mx-3">{{contact.country!.name}}</span>
+          </div>
+        </div>
+        <div class="flex container mx-auto items-center justify-between mt-2 pt-1 border-t justify-end" >
+          <button mat-stroked-button color="primary" (click)="onDeleteContact(contact.id)">View More</button>
+          <button mat-stroked-button color="accent" (click)="onEditContact(contact.id)">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

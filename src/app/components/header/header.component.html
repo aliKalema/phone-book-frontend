@@ -1,0 +1,35 @@
+<div class="max-w-7xl container grid  grid-cols-2 justify-items-stretch my-4 mx-auto items-center bg-slate-100">
+  <div class="container w-auto justify-self-start flex justify-start  items-center">
+    <div class="text-2xl text-indigo-900 font-black mr-7 flex justify-start container w-auto items-center">
+      PHONE BOOK
+    </div>
+    <ul class="navbar-nav flex  pl-0 list-style-none w-auto container items-center">
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 text-base hover:text-gray-700 focus:text-gray-700 p-0" routerLink="/contact">Contact</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link text-gray-500 hover:text-gray-700 text-base focus:text-gray-700 p-0" routerLink="/contacts/add">Add</a>
+      </li>
+    </ul>
+  </div>
+
+
+  <div class="container w-auto justify-self-end flex">
+    <div class="hidden sm:block flex-shrink flex-grow-0 justify-start px-2">
+      <div class="flex rounded-full justify-center items-center">
+        <form style="font-size: 12px;">
+          <mat-form-field appearance="outline">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Search here" (keyup)="onKeypressEvent($event)" [(ngModel)]="searchTerm" (input)="search(searchTerm)" name="searchTerm">
+            <mat-icon class="text-green-800" matSuffix>search</mat-icon>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+    <div class="">
+      <button class="rounded-full p-3 border-2 flex container w-auto items-center justify-center" (click)="onDeleteContact()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
